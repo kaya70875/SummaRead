@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function handleToggle() {
   const button = document.querySelector(".input-switch");
 
   // Retrieve stored state
@@ -19,4 +19,22 @@ document.addEventListener("DOMContentLoaded", () => {
       chrome.storage.sync.set({ buttonActive: true });
     }
   });
-});
+}
+
+function handleOptions() {
+  const saveButton = document.getElementById("save-settings");
+
+  chrome.storage.sync.get(["summaryLength"], (result) => {
+    const sliderValue = result.summaryLength || 200;
+    document.querySelector(".summary-length").value = sliderValue;
+  });
+
+  saveButton.addEventListener("click", () => {
+    const sliderValue = document.querySelector(".summary-length").value;
+    chrome.storage.sync.set({ summaryLength: sliderValue });
+  });
+}
+
+// Call the functions
+handleToggle();
+handleOptions();
