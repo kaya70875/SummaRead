@@ -24,24 +24,19 @@ const fetchSummary = async (rValue: number) => {
   return data;
 };
 
-// Listener for chrome.storage changes
-chrome.storage.onChanged.addListener(async (changes, namespace) => {
-  console.log("Storage changed:", changes.buttonActive);
-  if (namespace === "sync" && changes.buttonActive) {
-    const newState = changes.buttonActive.newValue;
-    console.log("new state", newState);
-    if (newState) {
+// Handle messages from background script
+chrome.runtime.onMessage.addListener(async (request) => {
+  if (request.action === "updateButtonState") {
+    console.log("Received state update:", request.state);
+
+    if (request.state) {
       await handleFetchAndHighlight();
     } else {
       removeHighlights();
     }
-  } else if (namespace === "sync" && changes.summaryLength) {
-    const newState = changes.summaryLength.newValue;
-    console.log("new state", newState);
-    if (newState) {
-      removeHighlights();
-      await handleFetchAndHighlight();
-    }
+  } else if (request.action === "updateSliderState") {
+    removeHighlights();
+    await handleFetchAndHighlight();
   }
 });
 
