@@ -3,7 +3,7 @@
     "description": "Base Level Extension",
     "version": "1.0",
     "manifest_version": 3,
-    "permissions" : ["activeTab", "storage", "scripting"],
+    "permissions" : ["activeTab", "storage", "scripting", "tabs"],
     "action": {
       "default_popup": "main.html"
     },
@@ -13,5 +13,8 @@
             "js" : ["dist/content_script.js"],
             "css" : ["src/styles/inject.css"]
         }
-    ]
+    ],
+    "background": {
+      "service_worker" : "dist/background.js"
+    }
   }
