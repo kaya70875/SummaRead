@@ -18,7 +18,6 @@
           <div class="brand">
             <div class="s-header">
               <h2>SummaRead</h2>
-
               <label class="switch">
                 <input class="input-switch" type="checkbox" />
                 <span class="slider round"></span>
@@ -52,22 +51,15 @@
             </p>
           </div>
         </div>
-        <div class="option-content" id="appearance">
-          <h2>Appearance</h2>
-          <label for="primary-color">Primary Color:</label>
-          <input
-            type="color"
-            id="primary-color"
-            name="primary-color"
-            value="#007AFF"
-          />
-          <p class="option-desc">Select your preferred color for highlights.</p>
-        </div>
       </div>
     </div>
-    <footer>
+    <div class="save-settings-wrapper">
       <button id="save-settings" class="save-settings">Save Changes</button>
-    </footer>
+    </div>
+    <div class="system-status">
+      <img src="./public/img/info.svg" alt="info" />
+      <p class="system-desc">Mark Completed!</p>
+    </div>
     <script type="module" src="./dist/scripts/toggle.js"></script>
     <script type="module" src="./dist/scripts/options/options.js"></script>
   </body>
