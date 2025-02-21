@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --backgroundColor : #F5F7FA;
+    --primaryText : #4A4A4A;
+    --buttonColor : #007AFF;
+}
+
+body {
+    font-family: 'Poppins', serif;
+    color : var(--primaryText);
+    width: 300px;
+    background-color: var(--backgroundColor);
+}
+
+.main-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap : 1rem;
+    width: 100%;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap : .5rem;
+    width: 100%;
+    color : var(--primaryText);
+
+    background-color: var(--buttonColor);
+    color : var(--backgroundColor);
+    padding : .25rem;
+    border : 2px solid var(--buttonColor);
+}
+
+.s-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap : .5rem;
+}
+
+.line {
+    border : 1px solid var(--primaryText);
+    width: 100%;
+}
+
+.summaread-header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap : .5rem;
+}
+
+.options-wrapper {
+    background-color: white;
+    padding: .5rem;
+    width: 100%;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    color : var(--primaryText)
+}
