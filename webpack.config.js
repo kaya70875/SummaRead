@@ -1,12 +1,24 @@
 const path = require("path");
 
 module.exports = {
+  mode: "production",
   entry: {
-    content: "./scripts/fetchContent.js", // Your content script
+    content_script: "./src/scripts/index.ts",
   },
   output: {
-    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
   },
-  mode: "production", // Ensures no eval() in production
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
