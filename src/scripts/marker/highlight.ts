@@ -13,6 +13,12 @@ const highlightSummary = (data: SummaryResponse) => {
     element: "span",
     className: "highlight",
     separateWordSearch: false,
+    done: () => {
+      chrome.runtime.sendMessage({
+        action: "highlightComplete",
+        info: "Highlighting completed",
+      });
+    },
   });
 };
 
@@ -25,8 +31,4 @@ const removeHighlights = () => {
     .forEach((el) => el.classList.remove("highlight"));
 };
 
-const testFunction = () => {
-  console.log("Test function called.");
-};
-
-export { highlightSummary, removeHighlights, testFunction };
+export { highlightSummary, removeHighlights };

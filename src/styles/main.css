@@ -113,3 +113,14 @@ body {
 .info-svg {
     color : var(--primaryText);
 }
+
+.system-status {
+    display: none;
+    align-items: center;
+    gap: .25rem;
+    color : green;
+
+    &.active {
+        display: flex;
+    }
+}
