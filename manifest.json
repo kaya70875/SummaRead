@@ -1,7 +1,9 @@
 {
     "name": "SummaRead - Smart Article Summarizer",
-    "description": "Enhance your reading experience with SummaRead! Quickly highlight and summarize key sentences from articles and web pages using advanced AI-driven techniques.",
+    "short_name" : "SummaRead",
+    "description": "Quickly highlight and summarize key sentences from articles and web pages using advanced AI-driven techniques.",
     "version": "1.0",
+    "host_permissions" : ["<all_urls>"],
     "manifest_version": 3,
     "permissions" : ["activeTab", "storage", "scripting", "tabs"],
     "action": {
@@ -15,11 +17,17 @@
     "content_scripts": [
         {
             "matches" : ["<all_urls>"],
-            "js" : ["dist/content_script.js"],
-            "css" : ["src/styles/inject.css"]
+            "js" : ["dist/content_script.js"]
         }
     ],
     "background": {
-      "service_worker" : "dist/background.js"
-    }
+      "service_worker" : "dist/background.js",
+      "type" : "module"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": ["public/icons/*"],
+        "matches": ["<all_urls>"]
+      }
+    ]
   }
