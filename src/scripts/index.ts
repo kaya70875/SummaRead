@@ -1,28 +1,8 @@
 import { SummaryResponse } from "../types/api";
-import { getR } from "./getOptions";
+import { applyMarkColors, getItemFromStorage, getR } from "./utils/helpers";
 console.log("Content Loaded.");
-import { highlightSummary, removeHighlights } from "./marker/highlight";
-
-// Function to fetch the summary as before
-const fetchSummary = async (rValue: number) => {
-  console.log("r", rValue);
-  const raw_text = Array.from(document.querySelectorAll("p"))
-    .map((p) => p.innerText)
-    .join(" ");
-
-  const response = await fetch("http://127.0.0.1:8000/summarize", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      paragraph: raw_text,
-      r: rValue || 200,
-    }),
-  });
-  const data = await response.json();
-  return data;
-};
+import { injectMarks, removeMarks } from "./marker/highlight";
+import { fetchSummary } from "./utils/fetch";
 
 // Handle messages from background script
 chrome.runtime.onMessage.addListener(async (request) => {
@@ -30,38 +10,44 @@ chrome.runtime.onMessage.addListener(async (request) => {
     console.log("Received state update:", request.state);
 
     if (request.state) {
-      await handleFetchAndHighlight();
+      handleFetchAndMark();
     } else {
-      removeHighlights();
+      removeMarks();
     }
   } else if (request.action === "updateSliderState") {
-    removeHighlights();
-    await handleFetchAndHighlight();
+    removeMarks();
+    await handleFetchAndMark();
   }
 });
 
-// Optionally, check initial state on load and update accordingly
-const getInitialState = async () => {
-  console.log("Checking initial state...");
-  chrome.storage.sync.get(["buttonActive"], async (result) => {
-    const active = result.buttonActive;
-    if (active) {
-      await handleFetchAndHighlight();
-    } else {
-      removeHighlights();
-    }
-  });
-};
+chrome.runtime.onMessage.addListener(async (request) => {
+  if (request.action === "updateColorPref") {
+    document.querySelectorAll<HTMLSpanElement>(".highlight").forEach((item) => {
+      item.style.backgroundColor = request.bgColor;
+      item.style.color = request.textColor;
+    });
+  }
+});
 
-const handleFetchAndHighlight = async () => {
+const handleFetchAndMark = async () => {
   try {
     const rValue = (await getR()) as number;
-    console.log("R value:", rValue);
     const data = await fetchSummary(rValue);
-    highlightSummary(data as SummaryResponse);
+    injectMarks(data as SummaryResponse);
+    await applyMarkColors();
   } catch (error) {
     console.error("Error fetching summary:", error);
   }
 };
 
-getInitialState();
+// Optionally, check initial state on load and update accordingly
+const initializeApp = async () => {
+  const active = await getItemFromStorage("buttonActive");
+  if (active) {
+    await handleFetchAndMark();
+  } else {
+    removeMarks();
+  }
+};
+
+initializeApp();
