@@ -85,13 +85,14 @@ body {
 
 .option-info {
     display: flex;
-    align-items: start;
+    align-items: center;
 }
 
 .option-content {
     display: flex;
     flex-direction: column;
     gap: .25rem;
+    width: 100%;
 
     &.disabled {
         opacity: 0.5;
@@ -117,7 +118,6 @@ body {
 .system-status {
     display: none;
     align-items: center;
-    gap: .25rem;
     color : green;
 
     &.active {
