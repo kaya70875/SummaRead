@@ -1,18 +1,14 @@
-export const getR = () => {
-  return new Promise((resolve) => {
-    chrome.storage.sync.get(["summaryLength"], async (result) => {
-      const sliderValue = result.summaryLength || 200;
-      resolve(sliderValue);
-    });
-  });
-};
-
 export const getItemFromStorage = (key: string) => {
-  return new Promise((resolve) => {
-    chrome.storage.sync.get([key], async (result) => {
-      const value = result[key];
-      resolve(value);
-    });
+  return new Promise((resolve, reject) => {
+    try {
+      chrome.storage.sync.get([key], async (result) => {
+        const value = result[key];
+        resolve(value);
+      });
+    } catch (error) {
+      console.error("Error retrieving item from storage:", error);
+      reject(error);
+    }
   });
 };
 
@@ -23,6 +19,11 @@ export const applyMarkColors = async () => {
   console.log("Initial Colors:", bgColor, textColor);
 
   document.querySelectorAll<HTMLSpanElement>(".highlight").forEach((item) => {
+    if (!item) {
+      console.log("No marked elements found");
+      return;
+    }
+
     item.style.backgroundColor = bgColor as string;
     item.style.color = textColor as string;
   });
