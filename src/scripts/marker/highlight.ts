@@ -4,19 +4,24 @@ import { SummaryResponse } from "../../types/api";
 // Function to highlight the summary using Mark.js
 const injectMarks = (data: SummaryResponse) => {
   const sentencesToHighlight = data.summary;
+  if (!sentencesToHighlight) return console.log("No sentences to highlight");
 
-  const markInstance = new Mark(document.body);
-  markInstance.mark(sentencesToHighlight, {
-    element: "span",
-    className: "highlight",
-    separateWordSearch: false,
-    done: () => {
-      chrome.runtime.sendMessage({
-        action: "highlightComplete",
-        info: "Highlighting completed",
-      });
-    },
-  });
+  try {
+    const markInstance = new Mark(document.body);
+    markInstance.mark(sentencesToHighlight, {
+      element: "span",
+      className: "highlight",
+      separateWordSearch: false,
+      done: () => {
+        chrome.runtime.sendMessage({
+          action: "highlightComplete",
+          info: "Highlighting completed",
+        });
+      },
+    });
+  } catch (error) {
+    console.error("Error while highlighting:", error);
+  }
 };
 
 // Function to remove highlights, for instance by removing the added span tags
@@ -24,6 +29,8 @@ const injectMarks = (data: SummaryResponse) => {
 const removeMarks = () => {
   // Simple example: remove all elements with class "highlight"
   const markInstance = new Mark(document.body);
+  if (!markInstance) return console.log("Mark instance not found");
+
   markInstance.unmark();
 };
 
