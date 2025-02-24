@@ -1,5 +1,5 @@
 import { SummaryResponse } from "../types/api";
-import { applyMarkColors, getItemFromStorage, getR } from "./utils/helpers";
+import { applyMarkColors, getItemFromStorage } from "./utils/helpers";
 console.log("Content Loaded.");
 import { injectMarks, removeMarks } from "./marker/highlight";
 import { fetchSummary } from "./utils/fetch";
@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener(async (request) => {
 
 const handleFetchAndMark = async () => {
   try {
-    const rValue = (await getR()) as number;
+    const rValue = (await getItemFromStorage("summaryLength")) as number;
     const data = await fetchSummary(rValue);
     injectMarks(data as SummaryResponse);
     await applyMarkColors();
