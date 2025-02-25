@@ -68,5 +68,44 @@ function handleOptions() {
   });
 }
 
+// Add event listeners for real-time color updates with debouncing
+const primaryColorInput = document.querySelector(
+  "#primary-color"
+) as HTMLInputElement;
+const secondaryColorInput = document.querySelector(
+  "#secondary-color"
+) as HTMLInputElement;
+
+const debounce = (func: Function, wait: number) => {
+  let timeout: NodeJS.Timeout;
+  return (...args: any[]) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+};
+
+const updatePrimaryColor = debounce(() => {
+  const color = primaryColorInput.value;
+  chrome.storage.sync.set({ backgroundColor: color });
+  chrome.runtime.sendMessage({ action: "updateColorPref", bgColor: color });
+}, 300);
+
+const updateSecondaryColor = debounce(() => {
+  const color = secondaryColorInput.value;
+  chrome.storage.sync.set({ textColor: color });
+  chrome.runtime.sendMessage({ action: "updateColorPref", textColor: color });
+}, 300);
+
+primaryColorInput?.addEventListener("input", updatePrimaryColor);
+secondaryColorInput?.addEventListener("input", updateSecondaryColor);
+
+document.addEventListener("DOMContentLoaded", () => {
+  chrome.storage.sync.get("highlightInfo", async (result) => {
+    if (result.highlightInfo) {
+      document.querySelector(".system-status")?.classList.add("active");
+    }
+  });
+});
+
 handleToggle();
 handleOptions();
