@@ -13,8 +13,8 @@ export const getItemFromStorage = (key: string) => {
 };
 
 export const applyMarkColors = async () => {
-  const bgColor = await getItemFromStorage("backgroundColor");
-  const textColor = await getItemFromStorage("textColor");
+  const bgColor = (await getItemFromStorage("backgroundColor")) || "#9acd32";
+  const textColor = (await getItemFromStorage("textColor")) || "#000000";
 
   console.log("Initial Colors:", bgColor, textColor);
 

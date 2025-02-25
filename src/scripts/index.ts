@@ -23,15 +23,20 @@ chrome.runtime.onMessage.addListener(async (request) => {
 chrome.runtime.onMessage.addListener(async (request) => {
   if (request.action === "updateColorPref") {
     document.querySelectorAll<HTMLSpanElement>(".highlight").forEach((item) => {
+      if (!item) return console.error("No item found");
+
       item.style.backgroundColor = request.bgColor;
       item.style.color = request.textColor;
     });
+  } else {
+    console.log("Unknown action:", request.action);
   }
 });
 
 const handleFetchAndMark = async () => {
   try {
-    const rValue = (await getItemFromStorage("summaryLength")) as number;
+    const rValue = ((await getItemFromStorage("summaryLength")) ||
+      200) as number;
     const data = await fetchSummary(rValue);
     injectMarks(data as SummaryResponse);
     await applyMarkColors();
