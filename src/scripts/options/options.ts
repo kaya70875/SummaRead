@@ -1,27 +1,35 @@
+import { getItemFromStorage } from "../utils/helpers.js";
+
+const optionElements = document.querySelectorAll(".option-content");
+const buttonElement = document.querySelector(".save-settings");
+
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === "sync" && changes.buttonActive) {
-    const newState = changes.buttonActive.newValue;
-    console.log("Options page detected state change:", newState);
+    const isAppActive = changes.buttonActive.newValue;
 
-    // Update the options page UI directly:
-    const optionElements = document.querySelectorAll(".option-content");
     optionElements.forEach((option) => {
-      if (newState) {
+      if (isAppActive) {
         option.classList.remove("disabled");
+        buttonElement?.classList.remove("disabled");
       } else {
         option.classList.add("disabled");
+        buttonElement?.classList.add("disabled");
       }
     });
   }
 });
 
-chrome.storage.sync.get(["buttonActive"], async (result) => {
-  const optionElements = document.querySelectorAll(".option-content");
+const initializeOptionActiveStates = async () => {
+  const buttonState = (await getItemFromStorage("buttonActive")) as boolean;
   optionElements.forEach((option) => {
-    if (result.buttonActive) {
+    if (buttonState) {
       option.classList.remove("disabled");
+      buttonElement?.classList.remove("disabled");
     } else {
       option.classList.add("disabled");
+      buttonElement?.classList.add("disabled");
     }
   });
-});
+};
+
+initializeOptionActiveStates();
