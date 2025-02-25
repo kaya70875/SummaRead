@@ -6,7 +6,7 @@ type NewState = string | number | boolean;
  * @param stateName  : The name of the state to be sent to the tab this can be get like request.bgColor
  * @param action : The action to be sent eventListener takes this like request.action
  */
-export const listenStorageChanges = async (
+export const sendStorageChangeToActiveTab = async (
   newState: NewState,
   stateName: string,
   action: string

@@ -1,4 +1,4 @@
-import { listenStorageChanges } from "./scripts/utils/listeners.js";
+import { sendStorageChangeToActiveTab } from "./scripts/utils/listeners.js";
 
 // Define a mapping of storage keys to their corresponding actions and state names
 const storageKeyMapping = {
@@ -16,7 +16,7 @@ chrome.storage.onChanged.addListener(async (changes, namespace) => {
     )) {
       if (changes[key]) {
         const newState = changes[key].newValue;
-        await listenStorageChanges(newState, stateName, action);
+        await sendStorageChangeToActiveTab(newState, stateName, action);
       }
     }
   }
