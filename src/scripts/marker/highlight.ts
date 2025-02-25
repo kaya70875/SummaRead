@@ -12,12 +12,6 @@ const injectMarks = (data: SummaryResponse) => {
       element: "span",
       className: "highlight",
       separateWordSearch: false,
-      done: () => {
-        chrome.runtime.sendMessage({
-          action: "highlightComplete",
-          info: "Highlighting completed",
-        });
-      },
     });
   } catch (error) {
     console.error("Error while highlighting:", error);

@@ -15,10 +15,3 @@ chrome.storage.onChanged.addListener(async (changes, namespace) => {
     await listenStorageChanges(newState, "textColor", "updateColorPref");
   }
 });
-
-// In background.js, listen and store:
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "highlightComplete") {
-    chrome.storage.sync.set({ highlightInfo: request.info });
-  }
-});
