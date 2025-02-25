@@ -1,17 +1,23 @@
 import { listenStorageChanges } from "./scripts/utils/listeners.js";
 
+// Define a mapping of storage keys to their corresponding actions and state names
+const storageKeyMapping = {
+  buttonActive: { action: "updateButtonState", stateName: "state" },
+  summaryLength: { action: "updateSliderState", stateName: "state" },
+  backgroundColor: { action: "updateColorPref", stateName: "bgColor" },
+  textColor: { action: "updateColorPref", stateName: "textColor" },
+};
+
+// Listener for storage changes
 chrome.storage.onChanged.addListener(async (changes, namespace) => {
-  if (namespace === "sync" && changes.buttonActive) {
-    const newState = changes.buttonActive.newValue;
-    await listenStorageChanges(newState, "state", "updateButtonState");
-  } else if (namespace === "sync" && changes.summaryLength) {
-    const newState = changes.summaryLength.newValue;
-    await listenStorageChanges(newState, "state", "updateSliderState");
-  } else if (namespace === "sync" && changes.backgroundColor) {
-    const newState = changes.backgroundColor.newValue;
-    await listenStorageChanges(newState, "bgColor", "updateColorPref");
-  } else if (namespace === "sync" && changes.textColor) {
-    const newState = changes.textColor.newValue;
-    await listenStorageChanges(newState, "textColor", "updateColorPref");
+  if (namespace === "sync") {
+    for (const [key, { action, stateName }] of Object.entries(
+      storageKeyMapping
+    )) {
+      if (changes[key]) {
+        const newState = changes[key].newValue;
+        await listenStorageChanges(newState, stateName, action);
+      }
+    }
   }
 });

@@ -7,7 +7,7 @@ type NewState = string | number | boolean;
  * @param action : The action to be sent eventListener takes this like request.action
  */
 export const listenStorageChanges = async (
-  newState: string,
+  newState: NewState,
   stateName: string,
   action: string
 ) => {
@@ -19,7 +19,7 @@ export const listenStorageChanges = async (
     if (tab?.id) {
       chrome.tabs.sendMessage(tab.id, {
         action: action,
-        [stateName]: newState as NewState,
+        [stateName]: newState,
       });
     }
   } catch (error) {
