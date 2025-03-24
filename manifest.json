@@ -1,11 +1,10 @@
 {
-    "name": "SummaRead - Smart Article Summarizer",
-    "short_name" : "SummaRead",
+    "name": "SummaRead",
     "description": "Quickly highlight and summarize key sentences from articles and web pages using advanced AI-driven techniques.",
     "version": "1.0",
     "host_permissions" : ["<all_urls>"],
     "manifest_version": 3,
-    "permissions" : ["activeTab", "storage", "scripting", "tabs"],
+    "permissions" : ["activeTab", "storage", "tabs"],
     "action": {
       "default_popup": "main.html",
       "default_icon" : {
