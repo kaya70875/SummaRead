@@ -9,6 +9,9 @@
     "webpack-cli": "^6.0.1"
   },
   "scripts": {
-    "build" : "npx tsc && npx webpack --mode production"
+    "build": "npx tsc && npx webpack --mode production"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.4.1"
   }
 }
