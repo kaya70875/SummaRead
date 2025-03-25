@@ -1,0 +1,47 @@
+footer {
+    background-color: var(--buttonColor);
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 1.5rem;
+}
+
+.patreon-btn {
+    background-color: white;
+    padding: .3em;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background color */
+
+    &&:hover {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+}
+
+.feedback-btn {
+    background-color: white;
+    padding: .3em;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: normal;
+
+    &&:hover {
+        opacity: 0.8;
+        transition: all 0.1s ease-in;
+    }
+}
+
+.patreon-txt {
+    color: var(--buttonColor);
+}
+
+.feedback-txt {
+    color: black;
+    opacity: 0.9;
+}

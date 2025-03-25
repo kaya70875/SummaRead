@@ -17,6 +17,10 @@ body {
     background-color: var(--backgroundColor);
 }
 
+a {
+    text-decoration: none;
+}
+
 .main-wrapper {
     width: 100%;
     display: flex;
