@@ -1,5 +1,7 @@
 import { Readability } from "@mozilla/readability";
 
+const baseURl = process.env.BASE_URL;
+
 // Function to fetch the summary as before
 export const fetchSummary = async (rValue: number) => {
   const documentClone = document.cloneNode(true) as Document;

@@ -12,6 +12,8 @@
     "build": "npx tsc && npx webpack --mode production"
   },
   "dependencies": {
-    "@mozilla/readability": "^0.4.1"
+    "@mozilla/readability": "^0.4.1",
+    "dotenv": "^16.4.7",
+    "node-polyfill-webpack-plugin": "^4.1.0"
   }
 }
