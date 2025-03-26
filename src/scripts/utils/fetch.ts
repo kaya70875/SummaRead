@@ -1,12 +1,14 @@
 import { Readability } from "@mozilla/readability";
 
+const baseURl = process.env.BASE_URL;
+
 // Function to fetch the summary as before
 export const fetchSummary = async (rValue: number) => {
   const documentClone = document.cloneNode(true) as Document;
   const article = new Readability(documentClone).parse();
   const raw_text = article ? article.textContent : "";
 
-  const response = await fetch(`http://127.0.0.1:8000/summarize`, {
+  const response = await fetch(`${baseURl}/summarize`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
