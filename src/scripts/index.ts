@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener(async (request) => {
 const handleFetchAndMark = async () => {
   try {
     const rValue = ((await getItemFromStorage("summaryLength")) ||
-      200) as number;
+      0.3) as number;
     const data = await fetchSummary(rValue);
     injectMarks(data as SummaryResponse);
     await applyMarkColors();
