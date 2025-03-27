@@ -1,30 +1,88 @@
 {
-    "name": "SummaRead",
-    "description": "Quickly highlight and summarize key sentences from articles and web pages using advanced AI-driven techniques.",
-    "version": "1.0",
-    "host_permissions" : ["<all_urls>"],
-    "manifest_version": 3,
-    "permissions" : ["activeTab", "storage", "tabs"],
-    "action": {
-      "default_popup": "main.html",
-      "default_icon" : {
-        "16" : "./public/icons/logo.png"
-      }
-    },
-    "content_scripts": [
-        {
-            "matches" : ["<all_urls>"],
-            "js" : ["dist/content_script.js"]
-        }
-    ],
-    "background": {
-      "service_worker" : "dist/background.js",
-      "type" : "module"
-    },
-    "web_accessible_resources": [
-      {
-        "resources": ["public/icons/*"],
-        "matches": ["<all_urls>"]
-      }
-    ]
+  "name": "SummaRead",
+  "description": "Quickly highlight and summarize key sentences from articles and web pages using advanced AI-driven techniques.",
+  "version": "1.0",
+  "host_permissions": [
+    "https://*.medium.com/*",
+    "https://www.psychologytoday.com/*",
+    "https://www.sciencenews.org/*",
+    "https://en.m.wikipedia.org/*",
+    "https://*.nytimes.com/*",
+    "https://*.theguardian.com/*",
+    "https://www.bbc.com/news/*",
+    "https://www.cnn.com/*",
+    "https://www.npr.org/*",
+    "https://www.forbes.com/*",
+    "https://www.huffpost.com/*",
+    "https://www.theatlantic.com/*",
+    "https://www.vox.com/*",
+    "https://www.wired.com/*",
+    "https://www.businessinsider.com/*",
+    "https://www.reuters.com/*",
+    "https://www.theverge.com/*",
+    "https://www.buzzfeed.com/*",
+    "https://www.independent.co.uk/*",
+    "https://www.cnbc.com/*",
+    "https://www.economist.com/*",
+    "https://www.ft.com/*",
+    "https://www.latimes.com/*",
+    "https://www.usatoday.com/*",
+    "https://www.washingtonpost.com/*",
+    "https://time.com/*",
+    "https://www.newscientist.com/*",
+    "https://www.pornhub.com/*"
+  ],
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "main.html",
+    "default_icon": {
+      "16": "./public/icons/logo.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.medium.com/*",
+        "https://www.psychologytoday.com/*",
+        "https://www.sciencenews.org/*",
+        "https://en.m.wikipedia.org/*",
+        "https://*.nytimes.com/*",
+        "https://*.theguardian.com/*",
+        "https://www.bbc.com/news/*",
+        "https://www.cnn.com/*",
+        "https://www.npr.org/*",
+        "https://www.forbes.com/*",
+        "https://www.huffpost.com/*",
+        "https://www.theatlantic.com/*",
+        "https://www.vox.com/*",
+        "https://www.wired.com/*",
+        "https://www.businessinsider.com/*",
+        "https://www.reuters.com/*",
+        "https://www.theverge.com/*",
+        "https://www.buzzfeed.com/*",
+        "https://www.independent.co.uk/*",
+        "https://www.cnbc.com/*",
+        "https://www.economist.com/*",
+        "https://www.ft.com/*",
+        "https://www.latimes.com/*",
+        "https://www.usatoday.com/*",
+        "https://www.washingtonpost.com/*",
+        "https://time.com/*",
+        "https://www.newscientist.com/*",
+        "https://www.pornhub.com/*"
+      ],
+      "js": [
+        "dist/content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "dist/background.js",
+    "type": "module"
   }
+}
