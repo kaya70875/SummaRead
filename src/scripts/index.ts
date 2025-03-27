@@ -1,6 +1,5 @@
 import { SummaryResponse } from "../types/api";
 import { applyMarkColors, getItemFromStorage } from "./utils/helpers";
-console.log("Content Loaded.");
 import { injectMarks, removeMarks } from "./marker/highlight";
 import { fetchSummary } from "./utils/fetch";
 
