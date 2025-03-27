@@ -30,7 +30,7 @@
     "https://www.washingtonpost.com/*",
     "https://time.com/*",
     "https://www.newscientist.com/*",
-    "https://www.pornhub.com/*"
+    "https://www.wikihow.com/*"
   ],
   "manifest_version": 3,
   "permissions": [
@@ -74,7 +74,7 @@
         "https://www.washingtonpost.com/*",
         "https://time.com/*",
         "https://www.newscientist.com/*",
-        "https://www.pornhub.com/*"
+        "https://www.wikihow.com/*"
       ],
       "js": [
         "dist/content_script.js"

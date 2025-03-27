@@ -26,4 +26,5 @@ module.exports = [
   "https://www.washingtonpost.com/*",
   "https://time.com/*",
   "https://www.newscientist.com/*",
+  "https://www.wikihow.com/*",
 ];
