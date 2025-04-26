@@ -99,13 +99,5 @@ const updateSecondaryColor = debounce(() => {
 primaryColorInput?.addEventListener("input", updatePrimaryColor);
 secondaryColorInput?.addEventListener("input", updateSecondaryColor);
 
-document.addEventListener("DOMContentLoaded", () => {
-  chrome.storage.sync.get("highlightInfo", async (result) => {
-    if (result.highlightInfo) {
-      document.querySelector(".system-status")?.classList.add("active");
-    }
-  });
-});
-
 handleToggle();
 handleOptions();

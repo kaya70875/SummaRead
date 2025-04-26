@@ -29,6 +29,13 @@ a {
     padding: 1rem;
 }
 
+.unsupported {
+    display: none;
+    color: crimson;
+    border: 1px solid crimson;
+    padding: 1em;
+}
+
 .main {
     display: flex;
     align-items: center;
