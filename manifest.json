@@ -35,8 +35,7 @@
   "manifest_version": 3,
   "permissions": [
     "activeTab",
-    "storage",
-    "tabs"
+    "storage"
   ],
   "action": {
     "default_popup": "main.html",
